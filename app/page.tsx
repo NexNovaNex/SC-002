@@ -544,7 +544,7 @@ export default function Page() {
               <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Watching the clock hit 3AM, then 4, then 5… again
               </div>
               <div className="h-4 w-1 bg-red-200 mx-auto"></div>
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Doctors telling you it's 'just anxiety' or 'age' and offering no real answers</div>
+              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Doctors telling you it&#39;s &#39;just anxiety&#39; or &#39;age&#39; and offering no real answers</div>
             </div>
           </div>
           {/* New Way */}
@@ -587,7 +587,7 @@ export default function Page() {
                 <div className="flex gap-1 mb-1">{[...Array(5)].map((_, i) => (<span key={i} className="text-yellow-400 text-lg">★</span>))}</div>
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="quote">🗣️</span> "My partner moved to the guest room. I was embarrassed. Now we sleep next to each other again."</div>
                 <div className="font-semibold text-gray-700 mb-1">- Dena M.</div>
-                <div className="text-gray-600 text-sm">""I didn't even realize how bad it had gotten. I'd wake up ashamed and exhausted. Now I sleep through most nights. My body's still, my mind's quiet. I feel human again."</div>
+                <div className="text-gray-600 text-sm">"I didn't even realize how bad it had gotten. I'd wake up ashamed and exhausted. Now I sleep through most nights. My body's still, my mind's quiet. I feel human again."</div>
               </div>
               <img src="/profile3.jpg" alt="Rina D." className="w-32 h-32 object-cover rounded-xl mb-4 md:mb-0 order-1 md:order-2" />
             </div>
@@ -831,7 +831,7 @@ export default function Page() {
               <div className="text-2xl md:text-3xl font-extrabold text-gray-900 text-center mb-2">1 Month Supply<br/>One Time Purchase</div>
               <div className="text-center text-gray-600 font-semibold mb-2">Try it once before committing</div>
               <div className="flex flex-col items-center mb-4">
-                <img src="/package-single.png" alt="Single Purchase" className="w-40 h-48 object-contain rounded-xl border-4 border-gray-200 bg-white mb-2" />
+                <img src="package-subscription.png" alt="Single Purchase" className="w-40 h-48 object-contain rounded-xl border-4 border-gray-200 bg-white mb-2" />
               </div>
               <ul className="w-full mb-4 text-base font-medium">
                 <li className="flex items-center justify-between py-1 border-b border-gray-100"><span className="flex items-center gap-2 text-green-600 font-bold">✔ 30-day supply</span><span className="text-gray-900 font-bold">$69</span></li>
