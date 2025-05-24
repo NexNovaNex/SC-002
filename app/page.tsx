@@ -5,6 +5,14 @@ import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { Playfair_Display, Inter } from 'next/font/google'
 
+// Add this TypeScript declaration at the top, after imports
+// @ts-ignore
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
   display: 'swap',
@@ -823,6 +831,7 @@ export default function Page() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-full text-xl transition flex items-center justify-center gap-2 shadow mt-2 mb-2"
+                onClick={() => { if (typeof window !== 'undefined' && window.fbq) { window.fbq('track', 'AddToCart'); } }}
               >
                 <span role="img" aria-label="cart">🛒</span> ADD TO CART
               </a>
@@ -856,6 +865,7 @@ export default function Page() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-full text-xl transition flex items-center justify-center gap-2 shadow mt-2 mb-2"
+                onClick={() => { if (typeof window !== 'undefined' && window.fbq) { window.fbq('track', 'AddToCart'); } }}
               >
                 <span role="img" aria-label="cart">🛒</span> ADD TO CART
               </a>
