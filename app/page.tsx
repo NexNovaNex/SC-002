@@ -419,14 +419,12 @@ export default function Page() {
             <div className="text-gray-700 mb-3">Finally — something that actually targets the neurological root of Restless Legs Syndrome.
             Not another sedative. Not another guess. Just ingredients that help your system reset — from the inside out.</div>
             <div className="italic text-gray-600 mb-6">Formulated by real people who've lived through RLS. For those who are still living it.</div>
-            <a
-              href="http://https//getserenitycore.com/tools/recurring/checkout_link?magic=eyJpdGVtcyI6IFt7ImlkIjogNTU1MzAyMzc2MjQ1ODUsICJxdWFudGl0eSI6IDEsICJzZWxsaW5nX3BsYW4iOiA2ODkwOTkyMTEwMTcsICJzZWxsaW5nX3BsYW5fZ3JvdXBfaWQiOiA3NzA4NTM0NDAwOX1dfQ==&store_id=200246"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
               className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-full text-lg transition mb-2 flex items-center justify-center gap-2 shadow text-center"
+              onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
             >
               SUBSCRIBE & SAVE <span>🛒</span>
-            </a>
+            </button>
             <div className="flex gap-6 mt-2">
               <div className="flex items-center gap-2 text-green-600 text-sm"><span>●</span> 60-Day Money Back Guarantee</div>
               <div className="flex items-center gap-2 text-green-600 text-sm"><span>●</span> Free Shipping</div>
