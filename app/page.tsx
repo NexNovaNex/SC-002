@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Playfair_Display, Inter } from 'next/font/google'
 
 const playfair = Playfair_Display({ 
@@ -19,6 +19,24 @@ const inter = Inter({
 
 export default function Page() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+
+  // Countdown timer logic
+  const [timeLeft, setTimeLeft] = useState(2 * 3600 + 22 * 60 + 33); // 2h 22m 33s in seconds
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
+  function formatTime(secs: number) {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    return `${h}h ${m.toString().padStart(2, '0')}m ${s.toString().padStart(2, '0')}s`;
+  }
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver((entries) => {
@@ -63,7 +81,7 @@ export default function Page() {
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-pink-50 to-white">
-        <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-12 px-4 py-16">
+        <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-8 px-2 md:px-4 py-6 md:py-16">
           {/* Left: Text Content */}
           <div className="flex-1 max-w-xl">
             <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4 text-gray-900">
@@ -127,13 +145,13 @@ export default function Page() {
         </div>
       </div>
       {/* Reviews Section */}
-      <section className="w-full flex justify-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex justify-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-2xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-2">Confidence with SerenityCore</h2>
           <p className="text-center text-gray-600 mb-8">"See how real people with RLS are finally sleeping through the night, quieting their legs, and feeling like themselves again — without sedation, meds, or side effects.</p>
           <div className="flex flex-col gap-4 mb-8">
             {/* Review 1 */}
-            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-4 items-start">
+            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-2 md:p-4 items-start">
               <img src="/profile1.jpg" alt="Tasha P." className="w-10 h-10 rounded-full object-cover" />
               <div>
                 <div className="font-semibold text-gray-800">Tasha P.</div>
@@ -141,7 +159,7 @@ export default function Page() {
               </div>
             </div>
             {/* Review 2 */}
-            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-4 items-start">
+            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-2 md:p-4 items-start">
               <img src="/profile2.jpg" alt="Marie S." className="w-10 h-10 rounded-full object-cover" />
               <div>
                 <div className="font-semibold text-gray-800">Marie S.</div>
@@ -149,7 +167,7 @@ export default function Page() {
               </div>
             </div>
             {/* Review 3 */}
-            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-4 items-start">
+            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-2 md:p-4 items-start">
               <img src="/profile3.jpg" alt="Maya R." className="w-10 h-10 rounded-full object-cover" />
               <div>
                 <div className="font-semibold text-gray-800">Jillian F.</div>
@@ -157,7 +175,7 @@ export default function Page() {
                       </div>
                     </div>
             {/* Review 4 */}
-            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-4 items-start">
+            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-2 md:p-4 items-start">
               <img src="/profile4.jpg" alt="Elise M." className="w-10 h-10 rounded-full object-cover" />
                     <div>
                 <div className="font-semibold text-gray-800">Elise M.</div>
@@ -165,7 +183,7 @@ export default function Page() {
               </div>
                             </div>
             {/* Review 5 */}
-            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-4 items-start">
+            <div className="flex gap-3 bg-gray-50 rounded-2xl shadow p-2 md:p-4 items-start">
               <img src="/profile5.jpg" alt="Shannon R." className="w-10 h-10 rounded-full object-cover" />
               <div>
                 <div className="font-semibold text-gray-800">Shannon R.</div>
@@ -179,7 +197,7 @@ export default function Page() {
                       </div>
       </section>
       {/* Founder Story Section */}
-      <section className="w-full flex justify-center bg-pink-50 py-10 md:py-16 px-4">
+      <section className="w-full flex justify-center bg-pink-50 py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full flex flex-col md:flex-row gap-10 items-start">
           {/* Left: Story */}
           <div className="flex-1 min-w-0 flex flex-col items-start md:items-start">
@@ -192,7 +210,7 @@ export default function Page() {
               For years, I thought I just had 'bad sleep habits' or maybe anxiety. But no matter what I tried — nothing prepared me for the constant, silent chaos that is RLS.<br/><br/>
               It started small — just a little twitching. Then full-on pacing. Sleepless nights. Separate beds. I was exhausted, embarrassed, and honestly — angry.
                         </div>
-            <div className="bg-white border-l-4 border-pink-400 rounded-r-xl p-4 mb-4 text-pink-700 font-medium shadow">
+            <div className="bg-white border-l-4 border-pink-400 rounded-r-xl p-2 md:p-4 mb-4 text-pink-700 font-medium shadow">
             I'd lay in bed, exhausted — and cry. Because I knew what was coming. The twitching. The restlessness. The shame. The night I'd lose — again.
                         </div>
             <div className="text-gray-700 mb-4">
@@ -221,33 +239,33 @@ export default function Page() {
                     </div>
       </section>
       {/* Root Causes Section */}
-      <section className="w-full flex flex-col items-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-4xl w-full mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-2">And Just Like That… It All Finally Made Sense</h2>
           <p className="text-center text-pink-700 font-medium mb-8">Turns out my RLS was due to this root <span className="italic">cause…</span></p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-pink-50 border border-pink-200 rounded-2xl p-5 flex items-start gap-3">
+            <div className="bg-pink-50 border border-pink-200 rounded-2xl p-3 md:p-5 flex items-start gap-3">
               <span className="text-2xl mt-1">🧬</span>
               <div>
                 <div className="font-bold text-pink-700 mb-1">Dopamine Deficiency</div>
                 <div className="text-gray-700 text-sm">Low dopamine in the brain disrupts motor control and the ability to stay still at night — a key RLS trigger.</div>
               </div>
             </div>
-            <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-5 flex items-start gap-3">
+            <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-3 md:p-5 flex items-start gap-3">
               <span className="text-2xl mt-1">🩸</span>
               <div>
                 <div className="font-bold text-indigo-700 mb-1">Glutamate Overactivity</div>
                 <div className="text-gray-700 text-sm">Excess excitatory neurotransmitters (like glutamate) overstimulate nerves, leading to nighttime leg activity.</div>
               </div>
             </div>
-            <div className="bg-orange-50 border border-orange-200 rounded-2xl p-5 flex items-start gap-3">
+            <div className="bg-orange-50 border border-orange-200 rounded-2xl p-3 md:p-5 flex items-start gap-3">
               <span className="text-2xl mt-1">🔥</span>
               <div>
                 <div className="font-bold text-orange-700 mb-1">Circadian Disruption</div>
                 <div className="text-gray-700 text-sm">RLS sufferers often have a misaligned body clock — unable to properly recognize when to rest vs. stay alert.</div>
               </div>
             </div>
-            <div className="bg-purple-50 border border-purple-200 rounded-2xl p-5 flex items-start gap-3">
+            <div className="bg-purple-50 border border-purple-200 rounded-2xl p-3 md:p-5 flex items-start gap-3">
               <span className="text-2xl mt-1">🧬</span>
               <div>
                 <div className="font-bold text-purple-700 mb-1">Neuro-sensitivity</div>
@@ -271,14 +289,14 @@ export default function Page() {
         </div>
       </section>
       {/* Key Ingredients Section */}
-      <section className="w-full flex flex-col items-center bg-purple-50 py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-purple-50 py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-purple-900 mb-2">I Kept Seeing the Same Ingredients — Over and Over — And It Finally Clicked</h2>
           <p className="text-center text-purple-700 mb-10">These weren't trendy sleep hacks. They were backed by real neuroscience — and made for people like me who were desperate to stop pacing the floor at 3AM.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
             {/* Saw Palmetto */}
             <div className="flex flex-col items-center text-center">
-              <img src="/ingredient-saw-palmetto.jpg" alt="Paeoniae Radix (Bai Shao)" className="w-28 h-28 rounded-full object-cover mb-4 border-4 border-purple-200" />
+              <img src="/ingredient-saw-palmetto.jpg" alt="Paeoniae Radix (Bai Shao)" className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover mb-2 md:mb-4 border-4 border-purple-200" />
               <div className="font-bold text-purple-800 mb-1">Paeoniae Radix (Bai Shao)</div>
               <div className="text-gray-700 text-sm">💤 Acts as a muscle relaxant and blood nourisher, traditionally used to reduce spasms and restore nighttime ease.</div>
             </div>
@@ -316,7 +334,7 @@ export default function Page() {
         </div>
       </section>
       {/* System Failure & Solution Section */}
-      <section className="w-full flex justify-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex justify-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full flex flex-col md:flex-row gap-10 items-center">
           {/* Left: Text */}
           <div className="flex-1">
@@ -333,7 +351,7 @@ export default function Page() {
         </div>
       </section>
       {/* What Makes SerenityCore Different Section */}
-      <section className="w-full flex flex-col items-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-4xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-purple-900 mb-10">What Makes SerenityCore Different</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -381,7 +399,7 @@ export default function Page() {
         </div>
       </section>
       {/* Product Introduction Section */}
-      <section className="w-full flex justify-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex justify-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full flex flex-col md:flex-row gap-10 items-center">
           {/* Left: Product Image and Badges */}
           <div className="flex-1 flex flex-col items-center md:items-start relative mb-8 md:mb-0 w-full">
@@ -417,43 +435,43 @@ export default function Page() {
         </div>
       </section>
       {/* Transformation Experience Section */}
-      <section className="w-full flex flex-col items-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-4xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-2">Here's What You'll Feel With <span className='text-pink-600'>SerenityCore</span></h2>
           <div className="text-center text-gray-500 text-sm mb-8">(Not our opinion. Simply the conclusion from 1,000+ clinical studies.)</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
             {/* Peaceful Showers Again */}
-            <div className="bg-pink-50 border border-pink-200 rounded-xl p-4 relative">
+            <div className="bg-pink-50 border border-pink-200 rounded-xl p-2 md:p-4 relative">
               <span className="absolute top-3 right-3 bg-pink-200 text-pink-700 text-xs font-bold px-2 py-1 rounded-full">🛏️</span>
               <div className="font-bold text-pink-700 mb-1">Still Nights Again</div>
               <div className="text-gray-700 text-sm">No more pacing. No more dread. Just still legs — and sleep.</div>
             </div>
             {/* Full, Feminine Hair */}
-            <div className="bg-pink-50 border border-pink-200 rounded-xl p-4 relative">
+            <div className="bg-pink-50 border border-pink-200 rounded-xl p-2 md:p-4 relative">
               <span className="absolute top-3 right-3 bg-pink-200 text-pink-700 text-xs font-bold px-2 py-1 rounded-full">💤</span>
               <div className="font-bold text-pink-700 mb-1">Rest That Feels Real</div>
               <div className="text-gray-700 text-sm">You wake up and think: "Wait… did I actually sleep through the night?"</div>
             </div>
             {/* Mirror Moments */}
-            <div className="bg-pink-50 border border-pink-200 rounded-xl p-4 relative">
+            <div className="bg-pink-50 border border-pink-200 rounded-xl p-2 md:p-4 relative">
               <span className="absolute top-3 right-3 bg-pink-200 text-pink-700 text-xs font-bold px-2 py-1 rounded-full">🪞</span>
               <div className="font-bold text-pink-700 mb-1">Morning Peace</div>
               <div className="text-gray-700 text-sm">You see your reflection — and don't look tired, irritated, or broken. You look like you.</div>
             </div>
             {/* Self-Love Again */}
-            <div className="bg-pink-50 border border-pink-200 rounded-xl p-4 relative">
+            <div className="bg-pink-50 border border-pink-200 rounded-xl p-2 md:p-4 relative">
               <span className="absolute top-3 right-3 bg-pink-200 text-pink-700 text-xs font-bold px-2 py-1 rounded-full">🫶</span>
               <div className="font-bold text-pink-700 mb-1">Emotional Reset</div>
               <div className="text-gray-700 text-sm">This isn't just rest. It's your stability. Your spark. Your softness coming back.</div>
             </div>
             {/* Made for PCOS Warriors */}
-            <div className="bg-pink-50 border border-pink-200 rounded-xl p-4 relative">
+            <div className="bg-pink-50 border border-pink-200 rounded-xl p-2 md:p-4 relative">
               <span className="absolute top-3 right-3 bg-pink-200 text-pink-700 text-xs font-bold px-2 py-1 rounded-full">🧠</span>
               <div className="font-bold text-pink-700 mb-1">Made for RLS Sufferers</div>
               <div className="text-gray-700 text-sm">This isn't for everyone. It's for the ones who were dismissed, sedated, and still searching.</div>
             </div>
             {/* Dating Confidence */}
-            <div className="bg-pink-50 border border-pink-200 rounded-xl p-4 relative">
+            <div className="bg-pink-50 border border-pink-200 rounded-xl p-2 md:p-4 relative">
               <span className="absolute top-3 right-3 bg-pink-200 text-pink-700 text-xs font-bold px-2 py-1 rounded-full">💬</span>
               <div className="font-bold text-pink-700 mb-1">Confidence to Connect Again</div>
               <div className="text-gray-700 text-sm">When your nights feel steady, your days feel safe — and you can show up again.</div>
@@ -465,7 +483,7 @@ export default function Page() {
           </div>
         </section>
       {/* SerenityCore Transformation Journey Section */}
-      <section className="w-full flex flex-col items-center bg-pink-50 py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-pink-50 py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-2xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-purple-900 mb-2">Your RLS Transformation Journey</h2>
           <div className="text-center text-gray-600 mb-10">This isn't instant. But it's real. Here's what starts to shift as your body learns how to rest again.</div>
@@ -477,7 +495,7 @@ export default function Page() {
               </div>
               <div className="flex-1">
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="calendar">🗓️</span> Day 1</div>
-                <div className="bg-white rounded-lg p-4 text-gray-700 shadow">Your body begins absorbing ingredients that support calm dopamine signals and reduce nighttime neural overactivity. You may not feel it yet, but something's shifting.</div>
+                <div className="bg-white rounded-lg p-2 md:p-4 text-gray-700 shadow">Your body begins absorbing ingredients that support calm dopamine signals and reduce nighttime neural overactivity. You may not feel it yet, but something's shifting.</div>
               </div>
             </div>
             {/* Week 2 */}
@@ -487,7 +505,7 @@ export default function Page() {
               </div>
               <div className="flex-1">
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="calendar">🗓️</span> Week 2</div>
-                <div className="bg-white rounded-lg p-4 text-gray-700 shadow">Your legs feel a bit quieter. You're not pacing as long. Falling asleep doesn't feel like a fight every night.</div>
+                <div className="bg-white rounded-lg p-2 md:p-4 text-gray-700 shadow">Your legs feel a bit quieter. You're not pacing as long. Falling asleep doesn't feel like a fight every night.</div>
               </div>
             </div>
             {/* Month 1 */}
@@ -497,7 +515,7 @@ export default function Page() {
                 </div>
               <div className="flex-1">
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="calendar">🗓️</span> Month 1</div>
-                <div className="bg-white rounded-lg p-4 text-gray-700 shadow">You're not waking up in panic anymore. The twitches are fewer. You've slept through the night once — maybe even twice.</div>
+                <div className="bg-white rounded-lg p-2 md:p-4 text-gray-700 shadow">You're not waking up in panic anymore. The twitches are fewer. You've slept through the night once — maybe even twice.</div>
               </div>
             </div>
             {/* Month 3 */}
@@ -507,7 +525,7 @@ export default function Page() {
                 </div>
               <div className="flex-1">
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="calendar">🗓️</span> Month 3</div>
-                <div className="bg-white rounded-lg p-4 text-gray-700 shadow">You've slept next to your partner again. No separate rooms. No shame. Just real, restful nights — and quiet legs.</div>
+                <div className="bg-white rounded-lg p-2 md:p-4 text-gray-700 shadow">You've slept next to your partner again. No separate rooms. No shame. Just real, restful nights — and quiet legs.</div>
               </div>
             </div>
             {/* Month 12 */}
@@ -517,7 +535,7 @@ export default function Page() {
                 </div>
               <div className="flex-1">
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="calendar">🗓️</span> Month 12</div>
-                <div className="bg-white rounded-lg p-4 text-gray-700 shadow">Your nights are yours again. You sleep. You focus. You feel steady, grounded, and back in control of your body. This is your normal now.</div>
+                <div className="bg-white rounded-lg p-2 md:p-4 text-gray-700 shadow">Your nights are yours again. You sleep. You focus. You feel steady, grounded, and back in control of your body. This is your normal now.</div>
               </div>
             </div>
           </div>
@@ -527,52 +545,52 @@ export default function Page() {
         </div>
       </section>
       {/* Old Way vs New Way Section */}
-      <section className="w-full flex justify-center bg-white py-10 md:py-16 px-4">
+      <section className="w-full flex justify-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Old Way */}
-          <div className="bg-red-50 rounded-2xl p-6 flex flex-col items-center">
+          <div className="bg-red-50 rounded-2xl p-3 md:p-6 flex flex-col items-center">
             <div className="text-2xl font-bold text-red-500 mb-6">THE OLD WAY</div>
             <div className="flex flex-col gap-6 w-full relative">
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Late-night pacing, stretching, and leg massages that barely help</div>
+              <div className="bg-white rounded-lg p-2 md:p-4 text-center text-gray-700 shadow">Late-night pacing, stretching, and leg massages that barely help</div>
               <div className="h-4 w-1 bg-red-200 mx-auto"></div>
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Stacking magnesium, iron, and random TikTok hacks with no lasting relief</div>
+              <div className="bg-white rounded-lg p-2 md:p-4 text-center text-gray-700 shadow">Stacking magnesium, iron, and random TikTok hacks with no lasting relief</div>
               <div className="h-4 w-1 bg-red-200 mx-auto"></div>
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Prescription meds that knock you out or cause rebound RLS</div>
+              <div className="bg-white rounded-lg p-2 md:p-4 text-center text-gray-700 shadow">Prescription meds that knock you out or cause rebound RLS</div>
               <div className="h-4 w-1 bg-red-200 mx-auto"></div>
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Sleeping in separate beds, feeling ashamed and exhausted</div>
+              <div className="bg-white rounded-lg p-2 md:p-4 text-center text-gray-700 shadow">Sleeping in separate beds, feeling ashamed and exhausted</div>
               <div className="h-4 w-1 bg-red-200 mx-auto"></div>
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Watching the clock hit 3AM, then 4, then 5… again
+              <div className="bg-white rounded-lg p-2 md:p-4 text-center text-gray-700 shadow">Watching the clock hit 3AM, then 4, then 5… again
               </div>
               <div className="h-4 w-1 bg-red-200 mx-auto"></div>
-              <div className="bg-white rounded-lg p-4 text-center text-gray-700 shadow">Doctors telling you it&#39;s &#39;just anxiety&#39; or &#39;age&#39; and offering no real answers</div>
+              <div className="bg-white rounded-lg p-2 md:p-4 text-center text-gray-700 shadow">Doctors telling you it's 'just anxiety' or 'age' and offering no real answers</div>
             </div>
           </div>
           {/* New Way */}
-          <div className="bg-green-50 rounded-2xl p-6 flex flex-col items-center">
+          <div className="bg-green-50 rounded-2xl p-3 md:p-6 flex flex-col items-center">
             <div className="text-2xl font-bold text-green-600 mb-6">THE NEW WAY</div>
             <div className="flex flex-col gap-6 w-full relative">
-              <div className="bg-green-100 rounded-lg p-4 text-center text-green-900 shadow">Support from within — where RLS actually begins: the brain's sleep signals</div>
+              <div className="bg-green-100 rounded-lg p-2 md:p-4 text-center text-green-900 shadow">Support from within — where RLS actually begins: the brain's sleep signals</div>
               <div className="h-4 w-1 bg-green-200 mx-auto"></div>
-              <div className="bg-green-100 rounded-lg p-4 text-center text-green-900 shadow">Backed by neuroscience, not random hacks or myths</div>
+              <div className="bg-green-100 rounded-lg p-2 md:p-4 text-center text-green-900 shadow">Backed by neuroscience, not random hacks or myths</div>
               <div className="h-4 w-1 bg-green-200 mx-auto"></div>
-              <div className="bg-green-100 rounded-lg p-4 text-center text-green-900 shadow">One nightly formula built specifically for RLS relief (not generic sleep aids)</div>
+              <div className="bg-green-100 rounded-lg p-2 md:p-4 text-center text-green-900 shadow">One nightly formula built specifically for RLS relief (not generic sleep aids)</div>
               <div className="h-4 w-1 bg-green-200 mx-auto"></div>
-              <div className="bg-green-100 rounded-lg p-4 text-center text-green-900 shadow">Calm neural overactivity, restore dopamine balance, and realign circadian rhythm</div>
+              <div className="bg-green-100 rounded-lg p-2 md:p-4 text-center text-green-900 shadow">Calm neural overactivity, restore dopamine balance, and realign circadian rhythm</div>
               <div className="h-4 w-1 bg-green-200 mx-auto"></div>
-              <div className="bg-green-100 rounded-lg p-4 text-center text-green-900 shadow">Fewer nighttime twitches, more restorative sleep</div>
+              <div className="bg-green-100 rounded-lg p-2 md:p-4 text-center text-green-900 shadow">Fewer nighttime twitches, more restorative sleep</div>
               <div className="h-4 w-1 bg-green-200 mx-auto"></div>
-              <div className="bg-green-100 rounded-lg p-4 text-center text-green-900 shadow">Wake up rested, connected, and in control of your nights</div>
+              <div className="bg-green-100 rounded-lg p-2 md:p-4 text-center text-green-900 shadow">Wake up rested, connected, and in control of your nights</div>
             </div>
           </div>
         </div>
       </section>
       {/* Real Women Testimonials Section */}
-      <section className="w-full flex flex-col items-center bg-pink-50 py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-pink-50 py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-purple-900 mb-10">What Real RLS Sufferers Are Saying After Finding SerenityCore</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Testimonial 1 */}
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-6 gap-6">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-3 md:p-6 gap-4 md:gap-6">
               <img src="/profile2.jpg" alt="Layla M." className="w-32 h-32 object-cover rounded-xl mb-4 md:mb-0" />
               <div className="flex-1">
                 <div className="flex gap-1 mb-1">{[...Array(5)].map((_, i) => (<span key={i} className="text-yellow-400 text-lg">★</span>))}</div>
@@ -582,17 +600,17 @@ export default function Page() {
               </div>
             </div>
             {/* Testimonial 2 */}
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-6 gap-6">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-3 md:p-6 gap-4 md:gap-6">
               <div className="flex-1 order-2 md:order-1">
                 <div className="flex gap-1 mb-1">{[...Array(5)].map((_, i) => (<span key={i} className="text-yellow-400 text-lg">★</span>))}</div>
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="quote">🗣️</span> "My partner moved to the guest room. I was embarrassed. Now we sleep next to each other again."</div>
                 <div className="font-semibold text-gray-700 mb-1">- Dena M.</div>
-                <div className="text-gray-600 text-sm">"I didn't even realize how bad it had gotten. I'd wake up ashamed and exhausted. Now I sleep through most nights. My body's still, my mind's quiet. I feel human again."</div>
+                <div className="text-gray-600 text-sm">""I didn't even realize how bad it had gotten. I'd wake up ashamed and exhausted. Now I sleep through most nights. My body's still, my mind's quiet. I feel human again."</div>
               </div>
               <img src="/profile3.jpg" alt="Rina D." className="w-32 h-32 object-cover rounded-xl mb-4 md:mb-0 order-1 md:order-2" />
             </div>
             {/* Testimonial 3 */}
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-6 gap-6">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-3 md:p-6 gap-4 md:gap-6">
               <img src="/profile1.jpg" alt="Samira F." className="w-32 h-32 object-cover rounded-xl mb-4 md:mb-0" />
               <div className="flex-1">
                 <div className="flex gap-1 mb-1">{[...Array(5)].map((_, i) => (<span key={i} className="text-yellow-400 text-lg">★</span>))}</div>
@@ -602,7 +620,7 @@ export default function Page() {
               </div>
             </div>
             {/* Testimonial 4 (placeholder image) */}
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-6 gap-6">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow p-3 md:p-6 gap-4 md:gap-6">
               <div className="flex-1 order-2 md:order-1">
                 <div className="flex gap-1 mb-1">{[...Array(5)].map((_, i) => (<span key={i} className="text-yellow-400 text-lg">★</span>))}</div>
                 <div className="font-bold text-pink-600 mb-1 flex items-center gap-2"><span role="img" aria-label="quote">🗣️</span> "I thought this was just my life now — tired, twitchy, ashamed. I was wrong."</div>
@@ -615,9 +633,9 @@ export default function Page() {
         </div>
       </section>
       {/* Urgency Section */}
-      <section className="w-full flex flex-col items-center bg-white py-12 px-4">
+      <section className="w-full flex flex-col items-center bg-white py-6 md:py-12 px-2 md:px-4">
         <div className="max-w-3xl w-full flex flex-col items-center">
-          <div className="w-full bg-purple-700 rounded-2xl flex flex-row items-center p-6 md:p-8 mb-6">
+          <div className="w-full bg-purple-700 rounded-2xl flex flex-row items-center p-3 md:p-8 mb-6">
             {/* Image and badge */}
             <div className="relative w-24 h-24 bg-white/20 rounded-xl flex items-center justify-center mr-6">
               <img src="/bottle-placeholder.png" alt="Limited Supply" className="w-16 h-16 object-contain" />
@@ -645,43 +663,43 @@ export default function Page() {
         </div>
       </section>
       {/* Relatable Problems Section */}
-      <section className="w-full flex flex-col items-center bg-purple-50 py-10 md:py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-purple-50 py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-4xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-purple-900 mb-2">If Any of This Sounds Familiar… You're Not Alone</h2>
           <div className="text-center text-purple-700 mb-10">Restless Legs Syndrome isn't just annoying. It's exhausting, isolating, and quietly devastating.</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {/* Problem 1 */}
-            <div className="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl p-3 md:p-5 shadow flex flex-col items-center text-center">
               <span className="text-3xl mb-2">🛏️</span>
               <div className="font-bold text-purple-800 mb-1">Dreading bedtime</div>
               <div className="text-gray-600 text-sm">You want to sleep — but you already know your legs will ruin it.</div>
             </div>
             {/* Problem 2 */}
-            <div className="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl p-3 md:p-5 shadow flex flex-col items-center text-center">
               <span className="text-3xl mb-2">🌀</span>
               <div className="font-bold text-purple-800 mb-1">Pacing the house at 3AM</div>
               <div className="text-gray-600 text-sm">You've done laps through the kitchen, down the hall, in circles — night after night.</div>
             </div>
             {/* Problem 3 */}
-            <div className="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl p-3 md:p-5 shadow flex flex-col items-center text-center">
               <span className="text-3xl mb-2">💔</span>
               <div className="font-bold text-purple-800 mb-1">Sleeping in separate beds</div>
               <div className="text-gray-600 text-sm">Not because you want to — but because you can't bear keeping them up anymore.</div>
             </div>
             {/* Problem 4 */}
-            <div className="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl p-3 md:p-5 shadow flex flex-col items-center text-center">
               <span className="text-3xl mb-2">🙄</span>
               <div className="font-bold text-purple-800 mb-1">Being dismissed</div>
               <div className="text-gray-600 text-sm">Doctors call it anxiety. Friends don't get it. You've heard "just move more" more times than you can count.</div>
             </div>
             {/* Problem 5 */}
-            <div className="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl p-3 md:p-5 shadow flex flex-col items-center text-center">
               <span className="text-3xl mb-2">💔</span>
               <div className="font-bold text-purple-800 mb-1">Losing confidence</div>
               <div className="text-gray-600 text-sm">You feel less like yourself and worry about what others see.</div>
             </div>
             {/* Problem 6 */}
-            <div className="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl p-3 md:p-5 shadow flex flex-col items-center text-center">
               <span className="text-3xl mb-2">🧪</span>
               <div className="font-bold text-purple-800 mb-1">Trying everything</div>
               <div className="text-gray-600 text-sm">Magnesium. Iron. Creams. Socks. Soap under the sheet. It all blends together now.</div>
@@ -690,14 +708,14 @@ export default function Page() {
           </div>
         </section>
       {/* Let Down Story Section */}
-      <section className="w-full flex flex-col items-center bg-white py-16 px-4">
+      <section className="w-full flex flex-col items-center bg-white py-8 md:py-16 px-2 md:px-4">
         <div className="max-w-4xl w-full">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-900">
             Why People With RLS Have Been <span className="text-pink-500">LET DOWN</span> For Years…
           </h2>
           <div className="flex flex-col md:flex-row gap-8 mb-8 items-center">
             <img src="/letdown1.jpg" alt="RLS story" className="w-48 h-48 object-cover rounded-xl grayscale" />
-            <div className="bg-pink-50 rounded-xl p-6 flex-1 text-gray-800 shadow">
+            <div className="bg-pink-50 rounded-xl p-3 md:p-6 flex-1 text-gray-800 shadow">
               <style jsx>{`
                 .letdown-strong-text { color: #1a1a1a; }
               `}</style>
@@ -720,27 +738,17 @@ export default function Page() {
             <li className="flex items-center gap-2 mb-1 text-gray-900"><span className="text-red-500">✔</span> <span className="font-bold">Circadian misfire</span> — your body can't tell when it's time to rest, and sleep becomes impossible.</li>
           </ul>
           <div className="font-bold text-gray-900 mb-8">No stretch, sock, or supplement can fix that — unless it works at the source.</div>
-          <div className="w-full border-2 border-red-400 bg-red-50 rounded-xl p-6 flex flex-col sm:flex-row items-center gap-4 mb-8">
+          <div className="w-full border-2 border-red-400 bg-red-50 rounded-xl p-6 flex flex-col sm:flex-row items-center gap-4 mb-4">
             <span className="text-3xl text-red-500 mr-2">❌</span>
             <div>
               <div className="font-bold text-gray-900 mb-1 text-lg md:text-xl">But for years, no one built a solution for us.</div>
               <div className="text-gray-900 text-sm md:text-base">Most "sleep aids" just knock you out.<br/><br/>Most "magnesium blends" barely scratch the surface.<br/><br/>And the rest? Random TikTok fixes that treat symptoms, not signals.</div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="flex-1 flex items-start gap-3">
-              <span className="text-2xl text-red-500 mt-1">❌</span>
-              <div>
-                <div className="font-bold text-gray-900 mb-1">But for years, no one built a solution for us.</div>
-                <div className="text-gray-900 text-sm">Most "sleep aids" just knock you out.<br/><br/>Most "magnesium blends" barely scratch the surface.<br/><br/>And the rest? Random TikTok fixes that treat symptoms, not signals.</div>
-              </div>
-            </div>
-            <img src="/letdown2.jpg" alt="No solution" className="w-48 h-48 object-cover rounded-xl grayscale" />
-            </div>
           </div>
         </section>
       {/* Informative Formula Section */}
-      <section className="w-full flex flex-col items-center bg-white py-8 md:py-12 px-4">
+      <section className="w-full flex flex-col items-center bg-white py-4 md:py-12 px-2 md:px-4">
         <div className="max-w-3xl w-full">
           <h2 className="text-xl md:text-2xl font-bold text-pink-600 flex items-center gap-2 mb-2">
             <span role="img" aria-label="formula">🧬</span> Finally, A Formula That Works From the Inside Out.
@@ -748,7 +756,7 @@ export default function Page() {
           <div className="text-gray-600 mb-6">Built on neuroscience, traditional medicine, and real-world RLS outcomes — with ingredients like:</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-4">
             {/* Paeoniae Radix (Bai Shao) */}
-            <div className="bg-purple-50 rounded-xl p-4">
+            <div className="bg-purple-50 rounded-xl p-2 md:p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-green-500 text-lg">🧠</span>
                 <span className="font-bold text-green-700">Paeoniae Radix (Bai Shao)</span>
@@ -756,7 +764,7 @@ export default function Page() {
               <div className="text-gray-700 text-sm">(used to calm spasms and nourish blood in traditional neurology formulas)</div>
             </div>
             {/* L-Tyrosine */}
-            <div className="bg-purple-50 rounded-xl p-4">
+            <div className="bg-purple-50 rounded-xl p-2 md:p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-purple-500 text-lg">🌿</span>
                 <span className="font-bold text-purple-700">L-Tyrosine</span>
@@ -764,7 +772,7 @@ export default function Page() {
               <div className="text-gray-700 text-sm">(supports dopamine — the "stillness signal" missing in RLS)</div>
             </div>
             {/* Berberine + Curcumin */}
-            <div className="bg-purple-50 rounded-xl p-4">
+            <div className="bg-purple-50 rounded-xl p-2 md:p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-pink-500 text-lg">🧠</span>
                 <span className="font-bold text-pink-700">Berberine + Curcumin</span>
@@ -772,7 +780,7 @@ export default function Page() {
               <div className="text-gray-700 text-sm">(calms inflammation + regulates hormones)</div>
             </div>
             {/* Paeoniae Radix (Bai Shao) */}
-            <div className="bg-purple-50 rounded-xl p-4">
+            <div className="bg-purple-50 rounded-xl p-2 md:p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-yellow-500 text-lg">⚡</span>
                 <span className="font-bold text-yellow-700">Paeoniae Radix (Bai Shao)</span>
@@ -784,11 +792,11 @@ export default function Page() {
           </div>
         </section>
       {/* Pricing/Package Choice Section */}
-      <section id="pricing-section" className="w-full flex flex-col items-center bg-white py-10 md:py-16 px-4">
+      <section id="pricing-section" className="w-full flex flex-col items-center bg-white py-4 md:py-16 px-2 md:px-4">
         <div className="max-w-5xl w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Subscription Card */}
-            <div className="relative rounded-2xl border-4 border-pink-400 bg-pink-50 shadow-xl flex flex-col items-center px-6 pt-8 pb-6">
+            <div className="relative rounded-2xl border-4 border-pink-400 bg-pink-50 shadow-xl flex flex-col items-center px-3 md:px-6 pt-6 md:pt-8 pb-4 md:pb-6">
               {/* Special Offer Bar */}
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-yellow-300 border-2 border-yellow-500 rounded-full px-6 py-2 font-bold text-yellow-900 text-sm flex items-center gap-2 shadow z-10">
                 <span role="img" aria-label="party">🎉</span> Limited Time Offer
@@ -813,7 +821,7 @@ export default function Page() {
               </div>
               <div className="text-pink-700 text-sm mb-4">Save $69 today + $20 every month</div>
               <a
-                href="http://https//getserenitycore.com/tools/recurring/checkout_link?magic=eyJpdGVtcyI6IFt7ImlkIjogNTU1MzAyMzc2MjQ1ODUsICJxdWFudGl0eSI6IDEsICJzZWxsaW5nX3BsYW4iOiA2ODkwOTkyMTEwMTcsICJzZWxsaW5nX3BsYW5fZ3JvdXBfaWQiOiA3NzA4NTM0NDAwOX1dfQ==&store_id=200246"
+                href="https://getserenitycore.com/tools/recurring/checkout_link?magic=eyJpdGVtcyI6IFt7ImlkIjogNTU1MzAyMzc2MjQ1ODUsICJxdWFudGl0eSI6IDEsICJzZWxsaW5nX3BsYW4iOiA2ODkwOTkyMTEwMTcsICJzZWxsaW5nX3BsYW5fZ3JvdXBfaWQiOiA3NzA4NTM0NDAwOX1dfQ==&store_id=200246"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-full text-xl transition flex items-center justify-center gap-2 shadow mt-2 mb-2"
@@ -823,11 +831,11 @@ export default function Page() {
               <div className="text-green-700 text-sm font-semibold flex items-center gap-2 mb-1"><span role="img" aria-label="guarantee">✅</span> 365-Day Money Back Guarantee</div>
               <div className="text-gray-700 text-xs mb-2">Online portal for easy cancel, skip, or pause.</div>
               <div className="w-full bg-yellow-100 border border-yellow-300 rounded-lg py-2 px-3 text-yellow-800 text-center text-xs font-semibold flex items-center justify-center gap-2 mt-2">
-                <span className="text-yellow-500">⏰</span> Ships today if ordered within <span className="font-bold">4h 24m</span>
+                <span className="text-yellow-500">⏰</span> {timeLeft > 0 ? (<span>Ships today if ordered within <span className="font-bold">{formatTime(timeLeft)}</span></span>) : (<span className="font-bold">Shipping window closed</span>)}
               </div>
             </div>
             {/* Single Purchase Card */}
-            <div className="relative rounded-2xl border-4 border-gray-300 bg-white shadow-xl flex flex-col items-center px-6 pt-8 pb-6">
+            <div className="relative rounded-2xl border-4 border-gray-300 bg-white shadow-xl flex flex-col items-center px-3 md:px-6 pt-6 md:pt-8 pb-4 md:pb-6">
               <div className="text-2xl md:text-3xl font-extrabold text-gray-900 text-center mb-2">1 Month Supply<br/>One Time Purchase</div>
               <div className="text-center text-gray-600 font-semibold mb-2">Try it once before committing</div>
               <div className="flex flex-col items-center mb-4">
@@ -855,14 +863,14 @@ export default function Page() {
               </a>
               <div className="text-green-700 text-sm font-semibold flex items-center gap-2 mb-1"><span role="img" aria-label="guarantee">✅</span> 365-Day Money Back Guarantee</div>
               <div className="w-full bg-yellow-100 border border-yellow-300 rounded-lg py-2 px-3 text-yellow-800 text-center text-xs font-semibold flex items-center justify-center gap-2 mt-2">
-                <span className="text-yellow-500">⏰</span> Ships today if ordered within <span className="font-bold">4h 24m</span>
+                <span className="text-yellow-500">⏰</span> {timeLeft > 0 ? (<span>Ships today if ordered within <span className="font-bold">{formatTime(timeLeft)}</span></span>) : (<span className="font-bold">Shipping window closed</span>)}
               </div>
             </div>
           </div>
         </div>
       </section>
       {/* Footer */}
-      <footer className="w-full bg-white border-t border-gray-200 py-8 mt-8">
+      <footer className="w-full bg-white border-t border-gray-200 py-4 md:py-8 mt-8">
         <div className="max-w-4xl mx-auto px-4 text-center text-xs text-gray-500">
           <div className="mb-2">© {new Date().getFullYear()} getserenitycore.com. All rights reserved.</div>
           <div className="flex justify-center gap-4">
