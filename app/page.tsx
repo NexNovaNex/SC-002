@@ -484,7 +484,7 @@ export default function Page() {
             </div>
           </div>
           <div className="flex justify-center">
-            <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full text-lg transition shadow" onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}>RECLAIM YOUR HAIR & HORMONES</button>
+            <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full text-lg transition shadow" onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}>Reclaim Your Nights</button>
             </div>
           </div>
         </section>
@@ -546,7 +546,7 @@ export default function Page() {
             </div>
           </div>
           <div className="flex justify-center">
-            <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full text-lg transition shadow" onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}>RECLAIM YOUR HAIR & HORMONES</button>
+            <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full text-lg transition shadow" onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}>Reclaim Your Nights</button>
           </div>
         </div>
       </section>
@@ -813,7 +813,7 @@ export default function Page() {
                 <img src="/package-subscription.png" alt="Subscription" className="w-40 h-48 object-contain rounded-xl border-4 border-pink-200 bg-white mb-2" />
               </div>
               <ul className="w-full mb-4 text-base font-medium">
-                <li className="flex items-center justify-between py-1 border-b border-pink-100"><span className="flex items-center gap-2 text-green-600 font-bold">✔ 30-day supply delivered monthly</span><span className="text-pink-700 font-bold line-through text-gray-400">$69</span></li>
+                <li className="flex items-center justify-between py-1 border-b border-pink-100"><span className="flex items-center gap-2 text-green-600 font-bold">✔ 30-day supply delivered monthly</span><span className="text-pink-700 font-bold line-through text-gray-400">$49</span></li>
                 <li className="flex items-center justify-between py-1 border-b border-pink-100"><span className="flex items-center gap-2 text-green-600 font-bold">✔ 30% off for life</span><span className="text-pink-700 font-bold line-through text-gray-400">$20</span></li>
                 <li className="flex items-center justify-between py-1 border-b border-pink-100"><span className="flex items-center gap-2 text-pink-600">🎁 <span className="font-bold">FREE</span> Sleep Recovery Tracker</span><span className="text-pink-700 font-bold line-through text-gray-400">$18</span></li>
                 <li className="flex items-center justify-between py-1 border-b border-pink-100"><span className="flex items-center gap-2 text-pink-600">🎧 <span className="font-bold">FREE</span> RLS Relief Audio Guide</span><span className="text-pink-700 font-bold line-through text-gray-400">$21</span></li>
@@ -821,13 +821,13 @@ export default function Page() {
                 <li className="flex items-center justify-between py-1"><span className="flex items-center gap-2 text-green-600 font-bold">✔ VIP Access to New Wellness Tools</span></li>
               </ul>
               <div className="flex items-center justify-center gap-2 text-lg font-bold mb-2">
-                <span className="text-gray-400 line-through">$118</span>
-                <span className="text-3xl text-pink-700">$49</span>
+                <span className="text-gray-400 line-through">$117</span>
+                <span className="text-3xl text-pink-700">$34.30</span>
                 <span className="text-pink-600 text-base">/month</span>
               </div>
-              <div className="text-pink-700 text-sm mb-4">Save $69 today + $20 every month</div>
+              <div className="text-pink-700 text-sm mb-4">Save $80 today + $20 every month</div>
               <a
-                href="https://getserenitycore.com/tools/recurring/checkout_link?magic=eyJpdGVtcyI6IFt7ImlkIjogNTU1MzAyMzc2MjQ1ODUsICJxdWFudGl0eSI6IDEsICJzZWxsaW5nX3BsYW4iOiA2ODkwOTkyMTEwMTcsICJzZWxsaW5nX3BsYW5fZ3JvdXBfaWQiOiA3NzA4NTM0NDAwOX1dfQ==&store_id=200246"
+                href="https://getserenitycore.com/tools/recurring/checkout_link?magic=eyJpdGVtcyI6IFt7ImlkIjogNTU1NDU5ODE4NjIxNTMsICJxdWFudGl0eSI6IDEsICJzZWxsaW5nX3BsYW4iOiA2ODkxMDM3MDAyMzMsICJzZWxsaW5nX3BsYW5fZ3JvdXBfaWQiOiA3NzA4ODAzMDk4NX1dfQ==&store_id=200246"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-full text-xl transition flex items-center justify-center gap-2 shadow mt-2 mb-2"
@@ -849,7 +849,7 @@ export default function Page() {
                 <img src="package-subscription.png" alt="Single Purchase" className="w-40 h-48 object-contain rounded-xl border-4 border-gray-200 bg-white mb-2" />
               </div>
               <ul className="w-full mb-4 text-base font-medium">
-                <li className="flex items-center justify-between py-1 border-b border-gray-100"><span className="flex items-center gap-2 text-green-600 font-bold">✔ 30-day supply</span><span className="text-gray-900 font-bold">$69</span></li>
+                <li className="flex items-center justify-between py-1 border-b border-gray-100"><span className="flex items-center gap-2 text-green-600 font-bold">✔ 30-day supply</span><span className="text-gray-900 font-bold">$49</span></li>
                 <li className="flex items-center justify-between py-1 border-b border-gray-100"><span className="flex items-center gap-2 text-red-400">✘ 30% off for life</span><span className="text-gray-400 font-bold line-through">$20</span></li>
                 <li className="flex items-center justify-between py-1 border-b border-gray-100"><span className="flex items-center gap-2 text-gray-400">✘ Sleep Recovery Tracker</span><span className="text-gray-400 font-bold line-through">$18</span></li>
                 <li className="flex items-center justify-between py-1 border-b border-gray-100"><span className="flex items-center gap-2 text-gray-400">✘ RLS Relief Audio Guide</span><span className="text-gray-400 font-bold line-through">$21</span></li>
@@ -861,7 +861,7 @@ export default function Page() {
                 <span className="text-3xl text-gray-900">$69</span>
               </div>
               <a
-                href="https://getserenitycore.com/cart/55530237624585:1"
+                href="http://getserenitycore.com/cart/55545981862153:1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-full text-xl transition flex items-center justify-center gap-2 shadow mt-2 mb-2"
