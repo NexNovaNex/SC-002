@@ -857,8 +857,8 @@ export default function Page() {
                 <li className="flex items-center justify-between py-1"><span className="flex items-center gap-2 text-gray-400">✘ VIP Access to New Wellness Tools</span></li>
               </ul>
               <div className="flex items-center justify-center gap-2 text-lg font-bold mb-2">
-                <span className="text-gray-400 line-through">$91</span>
-                <span className="text-3xl text-gray-900">$69</span>
+                <span className="text-gray-400 line-through">$69</span>
+                <span className="text-3xl text-gray-900">$49</span>
               </div>
               <a
                 href="http://getserenitycore.com/cart/55545981862153:1"
