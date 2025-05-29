@@ -75,11 +75,11 @@ export default function RootLayout({
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '1167466264682910');
+          fbq('init', '1030650302523455');
           fbq('track', 'PageView');
         `}} />
         <noscript>
-          <img height="1" width="1" style={{display: 'none'}} src="https://www.facebook.com/tr?id=1167466264682910&ev=PageView&noscript=1" />
+          <img height="1" width="1" style={{display: 'none'}} src="https://www.facebook.com/tr?id=1030650302523455&ev=PageView&noscript=1" />
         </noscript>
       </head>
       <body className={`${inter.className} bg-black bg-dotted-grid`}>{children}</body>
